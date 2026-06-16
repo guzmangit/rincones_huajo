@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Rincones de Huajolotitlán</title>
-    <!-- Ruta corregida para encontrar el CSS afuera -->
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
@@ -15,9 +14,7 @@
     </header>
 
     <nav class="menu">
-        <!-- Ruta corregida para volver al index que está afuera -->
         <a href="../index.html">Inicio</a>
-        <!-- Estos se quedan igual porque están en la misma carpeta 'html' -->
         <a href="historia.html">Historia</a>
         <a href="lugares.html">Lugares</a>
         <a href="registro.html">Registrarse</a>
@@ -25,7 +22,7 @@
 
     <main class="contenedor-formulario">
         <h2>Formulario de Registro</h2>
-        <form class="formulario">
+        <form class="formulario" id="miFormulario">
             <div class="campo">
                 <label for="nombre">Nombre completo:</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
@@ -48,6 +45,34 @@
     <footer>
         <p>Rincones de Huajolotitlán Creador Ricardo Cruz Guzman 607</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = "https://obymtbggkudzikkrsxdf.supabase.co";
+        // Recuerda cambiar este texto de abajo por tu clave anon public larga
+        const SUPABASE_ANON_KEY = "TU_LLAVE_ANON_PUBLIC_AQUÍ"; 
+
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        document.getElementById('miFormulario').addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const mensaje = document.getElementById('mensaje').value;
+
+            const { data, error } = await _supabase
+                .from('usuarios')
+                .insert([{ nombre, email, mensaje }]);
+
+            if (error) {
+                alert('Hubo un error al guardar: ' + error.message);
+            } else {
+                alert('¡Datos guardados con éxito en la nube de Supabase!');
+                document.getElementById('miFormulario').reset(); 
+            }
+        });
+    </script>
 
 </body>
 </html>
