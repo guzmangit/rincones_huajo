@@ -1,12 +1,11 @@
 :root {
-    --color-primario: #1a237e;    
-    --color-acento: #cfa052;      
-    --color-secundario: #2e7d32;  
-    --color-fondo: #f5f6fa;       
-    --color-texto: #1c1c1c;      
+    --color-primario: #8d6e63;   
+    --color-acento: #ffb74d;      
+    --color-secundario: #a1887f;  
+    --color-fondo: #faf8f5;      
+    --color-texto: #3e2723;      
     --blanco: #ffffff;
 }
-
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
